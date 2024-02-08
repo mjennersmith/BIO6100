@@ -1,0 +1,131 @@
+---
+title: "Homework 3"
+author: "Jenner Smith"
+date: "January 31, 2024"
+output: html_document
+---
+#Question 1
+
+Question:
+
+The primary reason for using Excel to set up data frames is that people like to have the columns aligned. However, if there are not too many columns, it may be faster to do the job in a plain text editor first and align the columns with tabs. In your text editor, type in (or copy and paste from here) the following lines of text:
+First String    Second      1.22      3.4
+Second          More Text   1.555555  2.2220
+Third           x           3         124
+Don’t worry about how many tab spaces are needed to set this up, just make sure the columns are aligned. Now, using a single regular expression, transform these lines into what we need for a proper .csv file:
+
+First String,Second,1.22,3.4
+Second,More Text,1.555555,2.2220
+Third,x,3,124
+
+Answer: ```find \s+ and replace with ,```
+
+Explanation: We are looking for any string of spaces using a special character and replacing with a single comma 
+
+#Question 2
+
+Question:
+
+A True Regex Story. I am preparing a collaborative NSF grant with a colleague at another university. One of the pieces of an NSF grant is a listing of potential conflicts of interest. NSF wants to know the first and last name of the collaborator and their institution.
+Here are a few lines of my conflict list:
+
+Ballif, Bryan, University of Vermont
+Ellison, Aaron, Harvard Forest
+Record, Sydne, Bryn Mawr
+However, my collaborator asked me to please provide to her the list in this format:
+
+Bryan Ballif (University of Vermont)
+Aaron Ellison (Harvard Forest)
+Sydne Record (Bryn Mawr)
+
+
+Answer ```find (\w+), (\w+), (\w+\s\w+\s*\w*) - replace with \2 \1 (\3)```
+
+Explanation: First we capture the last name and first name using parentheses and special expression for one or more characters (leaving out the commas, because we want them left out of the output). Then we need to capture the school name, so we use one set of parentheses around the string of special expressing for one or more letter and one space (put that twice because every school has at least two words) then represent the third words using the zero or more function so we can caputre both the two-word and three-word school names. Then we replace by reordering the first two capatures with a space in the middle (to give first then last) then putting the third capture/school name in parentheses.
+
+#Question 3#
+
+Question: 
+
+A Second True Regex Story. A few weeks ago, at Radio Bean’s Sunday afternoon old-time music session, one of the mandolin players gave me a DVD with over 1000 historic recordings of old-time fiddle tunes.
+The list of tunes (shown here as a single line of text) looks like this:
+
+0001 Georgia Horseshoe.mp3 0002 Billy In The Lowground.mp3 0003 Winder Slide.mp3 0004 Walking Cane.mp3
+Unfortunately, in this form, you can’t re-order the file names to put them in alphabetical order. I thought I could just strip out the leading numbers, but this will cause a conflict, because, for wildly popular tunes such as “Shove That Pig’s Foot A Little Further In The Fire”, there are multiple copies somewhere in the list.
+
+All of these files are on a single line, so first write a regular expression to place each file name on its own line:
+
+0001 Georgia Horseshoe.mp3
+0002 Billy In The Lowground.mp3
+0003 Winder Slide.mp3
+0004 Walking Cane.mp3
+
+Answer: ```find ".mp3\s" replace with ".mp3\n"```
+
+Explanation: Use the regular expression for space after ".mp3" and replace it with the special expression for line break to add breaks between each song in the list 
+
+#Question 4
+
+Question:
+
+Now write a regular expression to grab the four digit number and put it at the end of the title:
+Georgia Horseshoe_0001.mp3
+Billy In The Lowground_0002.mp3
+Winder Slide_0003.mp3
+Walking Cane_0004.mp3
+
+Answer: ```find "(\d{4})\s(\w*\s*\w*\s*\w*\s*\w*\s*).mp3 and replace with "\2_\1.mp3" ```
+
+Explanation: First, capture the song number using the regular expression for digits with the qualifier of exactly four digits surrounded by parentheses. Then, capture the song name using the same find command of a string of regular expressions for four consecutive words and spaces with zero or more characters, surrounded by parentheses. Then use the regular expressions for these elements to swtich their order and separate by an underscore, followed by .mp3
+
+#Question 5
+
+Question:
+
+Here is a data frame with genus, species, and two numeric variables.
+Camponotus,pennsylvanicus,10.2,44
+Camponotus,herculeanus,10.5,3
+Myrmica,punctiventris,12.2,4
+Lasius,neoniger,3.3,55
+Write a single regular expression to rearrange the data set like this:
+
+C_pennsylvanicus,44
+C_herculeanus,3
+M_punctiventris,4
+L_neoniger,55
+
+Answer: ```find "(\w)\w*,(\w*),\d*.\d,(\d*) and replace with \1_\2,\3```
+
+Explanation: Capture the first letter of the first word (not the entire word) using parentheses and the regular expression for a single letter. Leave out the end of the first word and the comma, then caputre the entire second word using the same process. Then we can leave out the first set of numbers and the period between them, but then capture the last number using parentheses and the regular expression for zero or more digits. In the replace box, we put an underscore between the elements representing the first letter and second word, then a comma before the third element representing the last number.
+
+#Question 6
+
+Question:
+
+Beginning with the original data set, rearrange it to abbreviate the species name like this:
+C_penn,44
+C_herc,3
+M_punc,4
+L_neon,55
+
+Answer: ```find "(\w)\w*,(\w{4})\w*,\d*.\d,(\d*)" and replace with"\1_\2,\3"```
+
+Explanation: Using the same function as question 5 to capture the first letter and the last number, but instead of capturing the whole second word, we want to capture just the first four letters. To do this we use parentheses and the regular expression for characters but set to exactly 4 characters. Then leave the remaining letters, using the zero or more qualifier, outside of the parentheses.
+
+
+Question 7
+
+Question:
+
+Beginning with the original data set, rearrange it so that the species and genus names are fused with the first 3 letters of each, followed by the two columns of numerical data in reversed order:
+Campen, 44, 10.2
+Camher, 3, 10.5
+Myrpun, 4, 12.2
+Lasneo, 55, 3.3
+
+Answer: ```find "(\w{3})\w*,(\w{3})\w*,(\d*.\d),(\d*)" and replace with "\1\2, \4, \3"``` 
+
+Explanation: We need to capture the first three letters of each word by putting parentheses around the regular expression for letters but set with the qualifier for three letters, then leaving the rest out of the parentheses by using the qualifier for zero or more letters. Repeat this process twice so it applies to both words in the line, separated by a comma, which is included in the original text but should not be kept in the output. Then, we need to separately capture the first set of numbers using the regular expression for digits and separated by a period. All of this should be put in parentheses so it can be used as a single elment when we replace. Then use the same process to caputre the last number, but with only one expression for zero or more digits. 
+
+In the output, put the first two elements - the three letters - followed by a comma and space with the fourth element, with another comma and space to finish with the third element.
+ 

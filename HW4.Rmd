@@ -1,0 +1,121 @@
+---
+title: "Homework 4"
+author: "Jenner Smith"
+date: "2024-02-07"
+output: html_document
+---
+**Question 1**: Suppose x = 1.1, a = 2.2, and b = 3.3. Assign each expression to the value of the variable z and print the value stored in z.
+
+*1a answer*: 
+```
+x = 1.1
+a = 2.2
+b = 3.3
+z = x^(a^b)
+print(z)
+```
+
+*Explanation*: 
+
+Start by setting each variable equal to their respective values using an = symbol. Then, write the equation set equal to z, use ^ to create a superscript, and make sure to use parentheses to compute a^b before x^.
+
+*1b answer*:
+```
+z = (x^a)^b
+print(z)
+```
+*Explanation*: Use the same values for this question that we set in 1a. To make sure that x^a gets calculated first, we will surround it in parentheses. Then, we want to raise that value to the b power, so we will use ^b on the outside of the parentheses so it affects the entire fist calculation.
+
+*1c answer*:
+```
+z = 3*(x^3) + 2*(x^2) + 1
+print(z)
+```
+
+*Explanation*: Use the same set variable values. Use () and ^ to make sure the exponenent calculations are done first, then add each multiplier to the outside of the parentheses with an * to make sure it acts as a multiplies and applies to the whole exponenent, rather than the single variable.
+
+**Question 2**: Using the rep and seq functions, create the following vectors:
+
+*2a answer*:
+```
+vec1 <- seq(from=1, to=8)
+vec2 <- seq(from=7, to=1)
+z <- c(vec1,vec2)
+print(z)
+```
+*Explanation*: Create two seaparate vectors that will evenetally be stiched into 1. Use the seq function to make vec1 go from 1 to 8, then use the same function to make vec2 from 7 to 1. Then create a single variable z that will represent a single vector that is made up of vec1 and vec2. When we print z, it should list the numbers of each vector in order, creating the desired sequence.
+
+*2b answer*:
+```
+vec2b <- 1:5
+rep(x=vec2b, times=vec2b)
+```
+*Explanation*: First, create a single vector, vec2b, using the shorthand sequence function to make a list from 1 to 5. Then, use the repetition and times functions to take each number from the vector and list it the same number of times as the next number in the vector (i.e. 1 once, 2 twice, etc.)
+
+*2c answer*:
+```
+vec2c <- 5:1
+rep(x=vec2c, times=vec2b)
+```
+*Explanation*: Without changing vec2b, create a new vector (vec2c) using the same shorthand seq function, but going from 5 to 1 this time. Then use the rep funtion again to take vec2c and repeat those values according to the numbers shown in vec2b.
+
+**Quesiton 3**:Create a vector of two random uniform numbers. In a spatial map, these can be interpreted as x and y coordinates that give the location of an individual (such as a marked forest tree in a plot that has been mapped). Using one of R’s inverse trigonometry functions (asin(), acos(), or atan()), convert these numbers into polar coordinates (If you don’t know what polar coordinates are, read about them on the web here, here, or in your calculus textbook).
+
+*3 Answer*:
+```
+vec3 <- c(runif(2))
+t <- atan((vec3[2])/(vec3[1]))
+print(t)
+r <- (vec3[2])*t
+print(r)
+```
+*Explanation*: First create a vector (here vec3) made up of two random uniform numbers, using the runif function to create a set of x and y coordinates. We can individually select each coordinate using vec3[1] and vec3[2]. To first find theta (the second polar coordinate, represented here by "t") we will use the atan funtion to get the inverse tangent of y/x, or vec3[2]/vec3[1] and set it equal to t. Then, we can tak the sine of our new t value and multiply it by y (vec3[2]) to get the hypotenuse (r), which is the first polar coordinate.
+
+**Question 4**: Create a vector queue <- c("sheep", "fox", "owl", "ant") where queue represents the animals that are lined up to enter Noah’s Ark, with the sheep at the front of the line. Using R expressions, update queue as:
+
+*4a Answer*:
+```
+queue[5] <- "serpent"
+```
+*Explanation*: Create a new fifth element of the queue using brackets and set it equal to serpent
+
+*4b Answer*:
+```
+queue <- queue[2:5]
+```
+*Explanation*: change the values in queue by setting it equal to the second through fifth elements using the sequence shorthand (2:5) and brackets 
+
+*4c Answer*:
+```
+queue[2:5] <- queue[1:4]
+queue[1] <- "donkey"
+```
+*Explanation*: First, reference the second-fifth elements of the queue and set them equal to the frist through fourth. This will duplicate the first element (which we will replace) and first four elements back a space. Then, set the first element to equal "donkey", which will put donkey at the front of the queue and line the original four behind.
+
+*4d Answer*:
+```
+queue <- queue[1:4]
+```
+Explanation: set the queue equal to the first four elements using brackets, which will remove the fifth element, the serpent.
+
+*4e Answer*:
+```
+queue <- queue[1:3]
+queue[3] <- "ant"
+```
+*Explanation*: Change the queue from four values to three using sequence shorthand. Then, set the third element of the queue (whcih was originally owl) to ant.
+
+*4f answer*:
+```
+queue [4] <- "ant"
+queue[3] <- "aphid"
+```
+*Explanation*: Create a fourth spot in the queue again and set it equal to ant. This makes both the third and fourth spot ant, but we will set the third spot equal to aphid, using the same process shown many times in question 4.
+ 
+*4g answer*:
+```length(queue)
+num <- c(1:4)
+names(num) <- queue
+print(num)
+```
+*Explanation*: First, use the length function to find out how many elements there are in the queue. Then, create a new number vector ("num" here) and set it equal to the number of elements in the queue, using the sequence shorthand. Then, we can set the names of the "num" vector equal to the elements in the queue using the names function, Once we print the "num" vector, we can see which animal corresponds to which number in the line, particularly that the aphid is in the third spot from the front.
