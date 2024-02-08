@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Here's a link to the example: [link](example.html)
 
-Homework 3 - Regular Expressions: [link](Homework3.html)
+Homework 3 - Regular Expressions: [link](Homework-3.html)
 
 Homework 4 - Atomic Vectors: [link](HW4.html)
 
