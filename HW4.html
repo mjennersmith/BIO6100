@@ -488,6 +488,44 @@ vector equal to the elements in the queue using the names function, Once
 we print the “num” vector, we can see which animal corresponds to which
 number in the line, particularly that the aphid is in the third spot
 from the front.</p>
+<p><strong>Question 5</strong>: Use R to create a vector of all of the
+integers from 1 to 100 that are not divisible by 2, 3, or 7.</p>
+<p><em>5 Answer</em>:</p>
+<pre><code>vec5 &lt;- 1:100
+
+vec5two &lt;- vec5 %% 2 == 0
+
+vec5three &lt;- vec5 %% 3 == 0
+
+vec5seven &lt;- vec5 %% 7 == 0
+
+vec5all &lt;- (vec5two == FALSE) &amp; (vec5three == FALSE) &amp; (vec5seven == FALSE)
+
+length(vec5all)
+vec5final &lt;- which (vec5all == TRUE)
+
+print(vec5final)</code></pre>
+<p><em>Explanation</em>: First, create a vector of integers from 1-100,
+using the shorthand sequence function, called vec5. Then, create three
+logical vectors to find the numbers in vec5 devisible by 2, 3, and 7.
+For example, we start by creating, vec5two, a logical vector that will
+be true when the integer in vec5 is divisible by two. To do this, we
+assign value to vec5two where the remainder of vec5 divided by two is
+zero, using the %% remainder function and == equal function. We repeat
+this process to create logcal vectors for zero remainder when dividing
+by three and seven. After we create these vectors, a new vector
+(vec5all) will be set as a logical to state true only where the integer
+is not divisible by 2,3, or 7. To do this, we assign vec5all as a
+logical where vec5two, vec5three, and vec5seven all equal false, meaning
+places where they do not have a zero remainder and are therefor not
+divisible. Once we have assigned vec5all, we want to check that this
+process has worked. Use the length function to make sure that there are
+100 values in vec5all. Finally, we need to find the integers that
+correspond with the TRUE statements in vec5all. We will call this
+vec5final, and assign it’s value using the which function to query which
+slots of vec5all are true (i.e. not divisible by 2,3, or 7). Once we set
+this vecotr, we should be able to print and get a vector of all the
+integers that are not divisible by 2,3, or 7.</p>
 
 
 
