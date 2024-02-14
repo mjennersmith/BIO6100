@@ -15,3 +15,5 @@ Homework 3 - Regular Expressions: [link](Homework-3.html)
 
 Homework 4 - Atomic Vectors: [link](HW4.html)
 
+Homework 5 - Matrices, Lists, & Data Frames: [link](HW5.html)
+
