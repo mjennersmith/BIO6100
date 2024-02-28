@@ -17,3 +17,7 @@ Homework 4 - Atomic Vectors: [link](HW4.html)
 
 Homework 5 - Matrices, Lists, & Data Frames: [link](HW5.html)
 
+Homework 6 - Simulating & Fitting Data Distributions: [link](HW6.html) <- need to finish!!!!!
+
+Homework 7 - Exploring Hypotheses: [link](HW7.html)
+
