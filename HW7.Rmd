@@ -1,0 +1,83 @@
+---
+title: "Exploring Hypotheses"
+author: "Jenner Smith"
+date: "28 February 2024"
+output: html_document
+---
+---
+***Data Setup:***
+
+For my fabricated data, we are comparing total phosphorus concentrations (TP) of sediment deposited after flood events in the summer, winter, and from sediment not tied to a specific flood event. In order to create this data set, I ran this code following the example from our experimental desings lecture:
+```
+floodGroup <- 3 # number of treatment groups
+floodName <- c("Test","SummerFlood", "WinterFlood") # names of groups
+floodSize <- c(17,32,28) # number of observations in each group
+floodMean <- c(341,867,621) # mean of each group
+floodSD <- c(50,50,50) # standard deviation of each group
+
+ID <- 1:(sum(floodSize)) # id vector for each row
+TP <- c(rnorm(n=floodSize[1],mean=floodMean[1],sd=floodSD[1]),
+            rnorm(n=floodSize[2],mean=floodMean[2],sd=floodSD[2]),
+            rnorm(n=floodSize[3],mean=floodMean[3],sd=floodSD[3]))
+floodGroup <- rep(floodName,floodSize)
+TPdata <- data.frame(ID,floodGroup,TP)
+str(TPdata)
+print(TPdata)
+```
+These values were chosen following the example of an actual dataset I'm currently aggregating for my research group, so the results are not entirely random but nor are they based on actual observation.
+
+***Data Analysis:***
+
+After creating this random dataset, we can use ANOVA analysis to quantify the variation in the data, both examining the variation in a single dataset, as well as variation between different random generations under the same parameters:
+
+```
+model <- aov(TP~floodGroup,data=TPdata)
+print(model)
+print(summary(model))
+z <- summary(model)
+str(z)
+aggregate(TP~floodGroup,data=TPdata,FUN=mean)
+unlist(z)
+unlist(z)[7]
+sum <- list(Fval=unlist(z)[7],probF=unlist(z)[9])
+sum
+```
+When running this code multiple times, we can see there is some variation in the p-value generated in the "sum" variable. This variation is expected, seeing as the data are randomly regenerated each time, within certain qualifying commands. Additionally, each number generated is essentially equal to zero when limiting the significant figures, implying that there is a significant pattern and we can reject our null hypothesis.
+
+***Data Graphing:***
+
+In another effort to analyze the dataset, we can generate a graph to visually interpret the distribution. I chose to use a violin plot in my graphical representation, as I find it very intuitive and I'm using the same representation with my actual research data.
+
+To create this graphic, I used:
+
+```
+plot <- ggplot(data=TPdata,
+               aes(x=floodGroup,y=TP,fill=floodGroup)) +
+  geom_violin()
+
+print(plot)
+```
+
+From this graph, it's easy to identify a normal distribution, in each of our flood timing groups. Additionally this violin plots are very effective in showing both the variation between flood groups, as well as within each flood group itself. When regenerating this graph with new data, the variation is much more apparent than the numerical analysis, showing much more change in distribution and extent to which each flood season's minimums and maximums reach.
+
+***Adjusting the Data - Mean***
+
+When experimenting with the data, the threshold at which the anlysis no longer generate a consistently significant pattern is when the means of each flood season are within about one standard deviation of each other. This is where I set my data:
+```
+floodGroup <- 3 # number of treatment groups
+floodName <- c("Test","Summer", "Winter") # names of groups
+floodSize <- c(17,32,28) # number of observations in each group
+floodMean <- c(841,1000,936) # mean of each group
+floodSD <- c(150,150,150) # standard deviation of each group
+```
+When rerunning this code, my p-value was greater than 0.05 about half the time.
+
+***Adjusting the Data - Sample Size***
+
+When adjusting the sample size of my data, I was able to get down to three samples from each flood group before losing consistency in significant p-values. While I do find it surprising that this number can be so low, I think it makes sense based on there being such a high difference in the mean phosphorus values I set before experimenting with the sample size.
+
+
+
+
+
+
