@@ -358,34 +358,52 @@ display: none;
 
 
 <p><strong>Answer 1</strong>:</p>
-<pre><code>n_dims &lt;- sample(x = 3:10, size=1)
-print(n_dims)
-
-vec1 &lt;- 1:(n_dims^2)
-print(vec1)
-
-shuffle1 &lt;- sample(vec1)
+<pre class="r"><code>n_dims &lt;- sample(x = 3:10, size=1)
+print(n_dims)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>vec1 &lt;- 1:(n_dims^2)
+print(vec1)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+<pre class="r"><code>shuffle1 &lt;- sample(vec1)
 
 mtx1 &lt;- matrix(data=shuffle1,nrow = n_dims)
-print(mtx1)
-
-t(mtx1)
-
-mean(mtx1[1,])
-mean(mtx1[n_dims,])
-
-sum(mtx1[1,])
-sum(mtx1[n_dims,])
-
-
-help(eigen)
-em &lt;- eigen(mtx1)
-print(em)
-
-typeof(em$values)
-typeof(em$vectors)</code></pre>
+print(mtx1)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    4    6    3
+## [2,]    9    5    7
+## [3,]    8    1    2</code></pre>
+<pre class="r"><code>t(mtx1)</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    4    9    8
+## [2,]    6    5    1
+## [3,]    3    7    2</code></pre>
+<pre class="r"><code>mean(mtx1[1,])</code></pre>
+<pre><code>## [1] 4.333333</code></pre>
+<pre class="r"><code>mean(mtx1[n_dims,])</code></pre>
+<pre><code>## [1] 3.666667</code></pre>
+<pre class="r"><code>sum(mtx1[1,])</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="r"><code>sum(mtx1[n_dims,])</code></pre>
+<pre><code>## [1] 11</code></pre>
+<pre class="r"><code>help(eigen)</code></pre>
+<pre><code>## starting httpd help server ... done</code></pre>
+<pre class="r"><code>em &lt;- eigen(mtx1)
+print(em)</code></pre>
+<pre><code>## eigen() decomposition
+## $values
+## [1] 14.835867+0.000000i -1.917934+2.495987i -1.917934-2.495987i
+## 
+## $vectors
+##              [,1]                  [,2]                  [,3]
+## [1,] 0.5263556+0i  0.3532229-0.2915226i  0.3532229+0.2915226i
+## [2,] 0.7570697+0i  0.1530325+0.4344752i  0.1530325-0.4344752i
+## [3,] 0.3870338+0i -0.7603028+0.0000000i -0.7603028+0.0000000i</code></pre>
+<pre class="r"><code>typeof(em$values)</code></pre>
+<pre><code>## [1] &quot;complex&quot;</code></pre>
+<pre class="r"><code>typeof(em$vectors)</code></pre>
+<pre><code>## [1] &quot;complex&quot;</code></pre>
 <p><strong>Answer 2</strong>:</p>
-<pre><code>my_matrix &lt;- matrix(runif(16), nrow=4)
+<pre class="r"><code>my_matrix &lt;- matrix(runif(16), nrow=4)
 
 log_vec &lt;- sample(1:100, 100)
 my_logical &lt;- log_vec &gt; 50
@@ -398,27 +416,84 @@ myList &lt;- list(my_matrix, my_logical, my_letters)
 
 myList2 &lt;- list(my_matrix[2,2], my_logical[2], my_letters[2])
 
-typeof(myList2[[1]])
-typeof(myList2[[2]])
-typeof(myList2[[3]])
-
-new_vec &lt;- c(myList2[[1]], myList2[[2]], myList2[[3]])
-print(new_vec)
-typeof(new_vec)</code></pre>
+typeof(myList2[[1]])</code></pre>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<pre class="r"><code>typeof(myList2[[2]])</code></pre>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<pre class="r"><code>typeof(myList2[[3]])</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>new_vec &lt;- c(myList2[[1]], myList2[[2]], myList2[[3]])
+print(new_vec)</code></pre>
+<pre><code>## [1] &quot;0.881622578483075&quot; &quot;TRUE&quot;              &quot;u&quot;</code></pre>
+<pre class="r"><code>typeof(new_vec)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
 <p><strong>Answer 3</strong>:</p>
-<pre><code>my_unis &lt;- runif(26, min=0, max = 10)
+<pre class="r"><code>my_unis &lt;- runif(26, min=0, max = 10)
 my_letters &lt;- sample(LETTERS[1:26], 26)
 
 frame &lt;- data.frame(my_unis, my_letters)
-print(frame)
+print(frame)</code></pre>
+<pre><code>##      my_unis my_letters
+## 1  0.9910628          O
+## 2  7.0661370          N
+## 3  1.7982517          B
+## 4  0.8520704          T
+## 5  5.2447355          S
+## 6  2.0130011          I
+## 7  2.9957600          Y
+## 8  9.3995654          U
+## 9  0.7757836          C
+## 10 7.3797927          G
+## 11 6.6107882          K
+## 12 1.4422248          F
+## 13 3.0154823          A
+## 14 4.0699208          P
+## 15 5.2677666          L
+## 16 2.2561036          H
+## 17 1.4881303          X
+## 18 4.5505579          J
+## 19 7.3566123          D
+## 20 2.8524779          R
+## 21 7.8499936          W
+## 22 4.1352597          Q
+## 23 7.8400751          M
+## 24 1.1690595          Z
+## 25 2.6752864          E
+## 26 8.3475771          V</code></pre>
+<pre class="r"><code>frame$my_unis &lt;- replace(frame$my_unis, sample(x = frame$my_unis, size = 4), NA)
 
-frame$my_unis &lt;- replace(frame$my_unis, sample(x = frame$my_unis, size = 4), NA)
-
-which(is.na(frame$my_unis) ==TRUE)
-
-frame[order(frame$my_letters),]
-
-mean(frame$my_unis, na.rm = TRUE)</code></pre>
+which(is.na(frame$my_unis) ==TRUE)</code></pre>
+<pre><code>## [1] 6 7</code></pre>
+<pre class="r"><code>frame[order(frame$my_letters),]</code></pre>
+<pre><code>##      my_unis my_letters
+## 13 3.0154823          A
+## 3  1.7982517          B
+## 9  0.7757836          C
+## 19 7.3566123          D
+## 25 2.6752864          E
+## 12 1.4422248          F
+## 10 7.3797927          G
+## 16 2.2561036          H
+## 6         NA          I
+## 18 4.5505579          J
+## 11 6.6107882          K
+## 15 5.2677666          L
+## 23 7.8400751          M
+## 2  7.0661370          N
+## 1  0.9910628          O
+## 14 4.0699208          P
+## 22 4.1352597          Q
+## 20 2.8524779          R
+## 5  5.2447355          S
+## 4  0.8520704          T
+## 8  9.3995654          U
+## 26 8.3475771          V
+## 21 7.8499936          W
+## 17 1.4881303          X
+## 7         NA          Y
+## 24 1.1690595          Z</code></pre>
+<pre class="r"><code>mean(frame$my_unis, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 4.351446</code></pre>
 
 
 

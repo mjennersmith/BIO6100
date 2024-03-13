@@ -8,7 +8,10 @@ output: html_document
 
 *Add Data*
 
-```
+```{r}
+library(ggplot2) # for graphics
+library(MASS) # for maximum likelihood estimation
+
 z<-read.csv("C:/Users/msmit156/OneDrive - University of Vermont/Documents/test3/pad_sed_TP.csv", header=TRUE, na.strings= "NA")
 str(z)
 summary(z)
@@ -18,14 +21,14 @@ z <- na.exclude(z) # remove row with zero value and rows with NA
 ```
 
 *Create Histogram*
-```
+```{r}
 p1 <- ggplot(data=z, aes(x=Depth, y=..density..)) +
   geom_histogram(color="grey60",fill="cornsilk",size=0.2) 
 print(p1)
 ```
 
 *Empirical Density Curve*
-```
+```{r}
 p1 <-  p1 +  geom_density(linetype="dotted",size=0.75)
 print(p1)
 ```
@@ -33,7 +36,7 @@ print(p1)
 *Get maximum likelihood parameters for ```normal```*
 Mean = 1.92101106
 SD = 2.88372699
-```
+```{r}
 normPars <- fitdistr(z$Depth,"normal")
 print(normPars)
 str(normPars)
@@ -41,7 +44,7 @@ normPars$estimate["mean"] # note structure of getting a named attribute
 ```
 
 *Plot ```normal``` probability density*
-```
+```{r}
 meanML <- normPars$estimate["mean"]
 sdML <- normPars$estimate["sd"]
 
@@ -52,7 +55,7 @@ p1 + stat
 ```
 
 *Plot ```exponential``` probability density*
-```
+```{r}
 expoPars <- fitdistr(z$Depth,"exponential")
 rateML <- expoPars$estimate["rate"]
 
@@ -61,13 +64,13 @@ p1 + stat + stat2
 ```
 
 *Plot ```uniform``` probability density*
-```
+```{r}
 stat3 <- stat_function(aes(x = xval, y = ..y..), fun = dunif, colour="darkgreen", n = length(z$Depth), args = list(min=min(z$Depth), max=max(z$Depth)))
 p1 + stat + stat2 + stat3
 ```
 
 *Plot ```gamma``` probability density*
-```
+```{r}
 gammaPars <- fitdistr(z$Depth,"gamma")
 shapeML <- gammaPars$estimate["shape"]
 rateML <- gammaPars$estimate["rate"]
@@ -77,7 +80,7 @@ p1 + stat + stat2 + stat3 + stat4
 ```
 
 *Plot ```beta``` probability density*
-```
+```{r}
 pSpecial <- ggplot(data=z, aes(x=Depth/(max(Depth + 0.1)), y=..density..)) +
   geom_histogram(color="grey60",fill="cornsilk",size=0.2) + 
   xlim(c(0,1)) +
@@ -93,7 +96,7 @@ pSpecial + statSpecial
 
 *Find the Best Fit Distribution*
 The best fit distribution for my data is the exponential distribution. After running the function to find the maximum likelihood parameters:
-```
+```{r}
 expoPars <- fitdistr(z$Depth,"exponential")
 rateML <- expoPars$estimate["rate"]
 
@@ -104,7 +107,7 @@ expoPars$estimate["rate"]
 we get rate = 0.5200658.
 
 *Simulate New Data Set*
-```
+```{r}
 num <- 1:1054
 var <- rexp(n=1054, rate=0.5200658)
 frame <- data.frame(num, var)

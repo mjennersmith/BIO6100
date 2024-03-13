@@ -8,7 +8,8 @@ output: html_document
 ***Data Setup:***
 
 For my fabricated data, we are comparing total phosphorus concentrations (TP) of sediment deposited after flood events in the summer, winter, and from sediment not tied to a specific flood event. In order to create this data set, I ran this code following the example from our experimental desings lecture:
-```
+
+```{r}
 floodGroup <- 3 # number of treatment groups
 floodName <- c("Test","SummerFlood", "WinterFlood") # names of groups
 floodSize <- c(17,32,28) # number of observations in each group
@@ -23,14 +24,16 @@ floodGroup <- rep(floodName,floodSize)
 TPdata <- data.frame(ID,floodGroup,TP)
 str(TPdata)
 print(TPdata)
+
 ```
+
 These values were chosen following the example of an actual dataset I'm currently aggregating for my research group, so the results are not entirely random but nor are they based on actual observation.
 
 ***Data Analysis:***
 
 After creating this random dataset, we can use ANOVA analysis to quantify the variation in the data, both examining the variation in a single dataset, as well as variation between different random generations under the same parameters:
 
-```
+```{r}
 model <- aov(TP~floodGroup,data=TPdata)
 print(model)
 print(summary(model))
@@ -50,7 +53,8 @@ In another effort to analyze the dataset, we can generate a graph to visually in
 
 To create this graphic, I used:
 
-```
+```{r}
+library(ggplot2)
 plot <- ggplot(data=TPdata,
                aes(x=floodGroup,y=TP,fill=floodGroup)) +
   geom_violin()
@@ -63,7 +67,7 @@ From this graph, it's easy to identify a normal distribution, in each of our flo
 ***Adjusting the Data - Mean***
 
 When experimenting with the data, the threshold at which the anlysis no longer generate a consistently significant pattern is when the means of each flood season are within about one standard deviation of each other. This is where I set my data:
-```
+```{r}
 floodGroup <- 3 # number of treatment groups
 floodName <- c("Test","Summer", "Winter") # names of groups
 floodSize <- c(17,32,28) # number of observations in each group

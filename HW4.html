@@ -361,27 +361,30 @@ display: none;
 Assign each expression to the value of the variable z and print the
 value stored in z.</p>
 <p><em>1a answer</em>:</p>
-<pre><code>x = 1.1
+<pre class="r"><code>x = 1.1
 a = 2.2
 b = 3.3
 z = x^(a^b)
 print(z)</code></pre>
+<pre><code>## [1] 3.61714</code></pre>
 <p><em>Explanation</em>:</p>
 <p>Start by setting each variable equal to their respective values using
 an = symbol. Then, write the equation set equal to z, use ^ to create a
 superscript, and make sure to use parentheses to compute a^b before
 x^.</p>
 <p><em>1b answer</em>:</p>
-<pre><code>z = (x^a)^b
+<pre class="r"><code>z = (x^a)^b
 print(z)</code></pre>
+<pre><code>## [1] 1.997611</code></pre>
 <p><em>Explanation</em>: Use the same values for this question that we
 set in 1a. To make sure that x^a gets calculated first, we will surround
 it in parentheses. Then, we want to raise that value to the b power, so
 we will use ^b on the outside of the parentheses so it affects the
 entire fist calculation.</p>
 <p><em>1c answer</em>:</p>
-<pre><code>z = 3*(x^3) + 2*(x^2) + 1
+<pre class="r"><code>z = 3*(x^3) + 2*(x^2) + 1
 print(z)</code></pre>
+<pre><code>## [1] 7.413</code></pre>
 <p><em>Explanation</em>: Use the same set variable values. Use () and ^
 to make sure the exponenent calculations are done first, then add each
 multiplier to the outside of the parentheses with an * to make sure it
@@ -390,10 +393,11 @@ the single variable.</p>
 <p><strong>Question 2</strong>: Using the rep and seq functions, create
 the following vectors:</p>
 <p><em>2a answer</em>:</p>
-<pre><code>vec1 &lt;- seq(from=1, to=8)
+<pre class="r"><code>vec1 &lt;- seq(from=1, to=8)
 vec2 &lt;- seq(from=7, to=1)
 z &lt;- c(vec1,vec2)
 print(z)</code></pre>
+<pre><code>##  [1] 1 2 3 4 5 6 7 8 7 6 5 4 3 2 1</code></pre>
 <p><em>Explanation</em>: Create two seaparate vectors that will
 evenetally be stiched into 1. Use the seq function to make vec1 go from
 1 to 8, then use the same function to make vec2 from 7 to 1. Then create
@@ -401,16 +405,18 @@ a single variable z that will represent a single vector that is made up
 of vec1 and vec2. When we print z, it should list the numbers of each
 vector in order, creating the desired sequence.</p>
 <p><em>2b answer</em>:</p>
-<pre><code>vec2b &lt;- 1:5
+<pre class="r"><code>vec2b &lt;- 1:5
 rep(x=vec2b, times=vec2b)</code></pre>
+<pre><code>##  [1] 1 2 2 3 3 3 4 4 4 4 5 5 5 5 5</code></pre>
 <p><em>Explanation</em>: First, create a single vector, vec2b, using the
 shorthand sequence function to make a list from 1 to 5. Then, use the
 repetition and times functions to take each number from the vector and
 list it the same number of times as the next number in the vector
 (i.e. 1 once, 2 twice, etc.)</p>
 <p><em>2c answer</em>:</p>
-<pre><code>vec2c &lt;- 5:1
+<pre class="r"><code>vec2c &lt;- 5:1
 rep(x=vec2c, times=vec2b)</code></pre>
+<pre><code>##  [1] 5 4 4 3 3 3 2 2 2 2 1 1 1 1 1</code></pre>
 <p><em>Explanation</em>: Without changing vec2b, create a new vector
 (vec2c) using the same shorthand seq function, but going from 5 to 1
 this time. Then use the rep funtion again to take vec2c and repeat those
@@ -424,11 +430,13 @@ numbers into polar coordinates (If you don’t know what polar coordinates
 are, read about them on the web here, here, or in your calculus
 textbook).</p>
 <p><em>3 Answer</em>:</p>
-<pre><code>vec3 &lt;- c(runif(2))
+<pre class="r"><code>vec3 &lt;- c(runif(2))
 t &lt;- atan((vec3[2])/(vec3[1]))
-print(t)
-r &lt;- (vec3[2])*t
+print(t)</code></pre>
+<pre><code>## [1] 0.2191099</code></pre>
+<pre class="r"><code>r &lt;- (vec3[2])*t
 print(r)</code></pre>
+<pre><code>## [1] 0.0464673</code></pre>
 <p><em>Explanation</em>: First create a vector (here vec3) made up of
 two random uniform numbers, using the runif function to create a set of
 x and y coordinates. We can individually select each coordinate using
@@ -442,16 +450,17 @@ the hypotenuse (r), which is the first polar coordinate.</p>
 up to enter Noah’s Ark, with the sheep at the front of the line. Using R
 expressions, update queue as:</p>
 <p><em>4a Answer</em>:</p>
-<pre><code>queue[5] &lt;- &quot;serpent&quot;</code></pre>
+<pre class="r"><code>queue &lt;- c(&quot;sheep&quot;, &quot;fox&quot;, &quot;owl&quot;, &quot;ant&quot;)
+queue[5] &lt;- &quot;serpent&quot;</code></pre>
 <p><em>Explanation</em>: Create a new fifth element of the queue using
 brackets and set it equal to serpent</p>
 <p><em>4b Answer</em>:</p>
-<pre><code>queue &lt;- queue[2:5]</code></pre>
+<pre class="r"><code>queue &lt;- queue[2:5]</code></pre>
 <p><em>Explanation</em>: change the values in queue by setting it equal
 to the second through fifth elements using the sequence shorthand (2:5)
 and brackets</p>
 <p><em>4c Answer</em>:</p>
-<pre><code>queue[2:5] &lt;- queue[1:4]
+<pre class="r"><code>queue[2:5] &lt;- queue[1:4]
 queue[1] &lt;- &quot;donkey&quot;</code></pre>
 <p><em>Explanation</em>: First, reference the second-fifth elements of
 the queue and set them equal to the frist through fourth. This will
@@ -460,26 +469,30 @@ elements back a space. Then, set the first element to equal “donkey”,
 which will put donkey at the front of the queue and line the original
 four behind.</p>
 <p><em>4d Answer</em>:</p>
-<pre><code>queue &lt;- queue[1:4]</code></pre>
+<pre class="r"><code>queue &lt;- queue[1:4]</code></pre>
 <p>Explanation: set the queue equal to the first four elements using
 brackets, which will remove the fifth element, the serpent.</p>
 <p><em>4e Answer</em>:</p>
-<pre><code>queue &lt;- queue[1:3]
+<pre class="r"><code>queue &lt;- queue[1:3]
 queue[3] &lt;- &quot;ant&quot;</code></pre>
 <p><em>Explanation</em>: Change the queue from four values to three
 using sequence shorthand. Then, set the third element of the queue
 (whcih was originally owl) to ant.</p>
 <p><em>4f answer</em>:</p>
-<pre><code>queue [4] &lt;- &quot;ant&quot;
+<pre class="r"><code>queue [4] &lt;- &quot;ant&quot;
 queue[3] &lt;- &quot;aphid&quot;</code></pre>
 <p><em>Explanation</em>: Create a fourth spot in the queue again and set
 it equal to ant. This makes both the third and fourth spot ant, but we
 will set the third spot equal to aphid, using the same process shown
 many times in question 4.</p>
 <p><em>4g answer</em>:</p>
-<pre class="length(queue)"><code>num &lt;- c(1:4)
+<pre class="r"><code>length(queue)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>num &lt;- c(1:4)
 names(num) &lt;- queue
 print(num)</code></pre>
+<pre><code>## donkey    fox  aphid    ant 
+##      1      2      3      4</code></pre>
 <p><em>Explanation</em>: First, use the length function to find out how
 many elements there are in the queue. Then, create a new number vector
 (“num” here) and set it equal to the number of elements in the queue,
@@ -491,7 +504,7 @@ from the front.</p>
 <p><strong>Question 5</strong>: Use R to create a vector of all of the
 integers from 1 to 100 that are not divisible by 2, 3, or 7.</p>
 <p><em>5 Answer</em>:</p>
-<pre><code>vec5 &lt;- 1:100
+<pre class="r"><code>vec5 &lt;- 1:100
 
 vec5two &lt;- vec5 %% 2 == 0
 
@@ -501,10 +514,13 @@ vec5seven &lt;- vec5 %% 7 == 0
 
 vec5all &lt;- (vec5two == FALSE) &amp; (vec5three == FALSE) &amp; (vec5seven == FALSE)
 
-length(vec5all)
-vec5final &lt;- which (vec5all == TRUE)
+length(vec5all)</code></pre>
+<pre><code>## [1] 100</code></pre>
+<pre class="r"><code>vec5final &lt;- which (vec5all == TRUE)
 
 print(vec5final)</code></pre>
+<pre><code>##  [1]  1  5 11 13 17 19 23 25 29 31 37 41 43 47 53 55 59 61 65 67 71 73 79 83 85
+## [26] 89 95 97</code></pre>
 <p><em>Explanation</em>: First, create a vector of integers from 1-100,
 using the shorthand sequence function, called vec5. Then, create three
 logical vectors to find the numbers in vec5 devisible by 2, 3, and 7.

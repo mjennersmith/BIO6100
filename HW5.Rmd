@@ -7,7 +7,7 @@ output: html_document
 
 **Answer 1**:
 
-```
+```{r}
 n_dims <- sample(x = 3:10, size=1)
 print(n_dims)
 
@@ -38,7 +38,7 @@ typeof(em$vectors)
 
 **Answer 2**:
 
-```
+```{r}
 my_matrix <- matrix(runif(16), nrow=4)
 
 log_vec <- sample(1:100, 100)
@@ -63,7 +63,7 @@ typeof(new_vec)
 
 **Answer 3**:
 
-```
+```{r}
 my_unis <- runif(26, min=0, max = 10)
 my_letters <- sample(LETTERS[1:26], 26)
 
