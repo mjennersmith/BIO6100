@@ -7,7 +7,6 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-da
 Here's a link to the example: [link](example.html)
 
 Homework 3 - Regular Expressions: [link](Homework-3.html)
@@ -19,4 +18,6 @@ Homework 5 - Matrices, Lists, & Data Frames: [link](HW5.html)
 Homework 6 - Simulating & Fitting Data Distributions: [link](HW6.html)
 
 Homework 7 - Exploring Hypotheses: [link](HW7.html)
+
+Homework 8 - Data manipulations using the dplyr package: [link](HW8.html)
 
