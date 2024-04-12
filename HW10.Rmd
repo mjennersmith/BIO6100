@@ -1,0 +1,81 @@
+---
+title: "For loops and randomization tests"
+author: "Jenner Smith"
+date: "2024-04-03"
+output: html_document
+---
+*Question 1:* Using a for loop, write a function to calculate the number of zeroes in a numeric vector. Before entering the loop, set up a counter variable counter <- 0. Inside the loop, add 1 to counter each time you have a zero in the vector. Finally, use return(counter) for the output.
+
+```{r}
+counter <- 0
+vec <- rbinom(25,1,.5)
+
+for (i in 1:length(vec)) {
+  if (vec[i] == 0) {
+   counter <- counter + 1
+  }
+  return(counter)
+}
+```
+
+*Question 2:* Use subsetting instead of a loop to rewrite the function as a single line of code.
+
+```{r}
+counter <- 0
+vec <- rbinom(25,1,.5)
+
+length(vec) - sum(vec)
+```
+
+*Question 3:* Write a function that takes as input two integers representing the number of rows and columns in a matrix. The output is a matrix of these dimensions in which each element is the product of the row number x the column number.
+
+```{r}
+mtx <- function(x=x,y=y) {
+  m <- matrix(1,nrow=x,ncol=y)
+  for (i in 1:nrow(m)){
+    for (j in 1:ncol(m)) {
+     m[i,j] <- m[i,j]*i*j
+    }
+  }
+  return(m)
+}
+
+mtx(x=5,y=4)
+```
+
+*Question 4a:*Now let’s practice calling custom functions within a for loops. Use the code from previous lectures on loops and functions to complete the following steps:
+  
+4a: Simulate a dataset with 3 groups of data, each group drawn from a distribution with a different mean. The final data frame should have 1 column for group and 1 column for the response variable.
+
+```{r}
+group1 <- rnorm(50,mean=25,sd=12)
+group2 <- rnorm(50,mean=19,sd=12)
+group3 <- rnorm(50,mean=26,sd=12)
+data <- data.frame(group1,group2,group3)
+library(tidyverse)
+data <- pivot_longer(data,cols=c('group1','group2','group3'),names_to = 'group',values_to = 'response')
+```
+
+4b: Write a custom function that 1) reshuffles the response variable, and 2) calculates the mean of each group in the reshuffled data. Store the means in a vector of length 3.
+
+```{r}
+shuffle <- function() {
+  data$response <- sample(data$response)
+  g1 <- (subset(data,data$group=='group1'))
+  g2 <- (subset(data,data$group=='group2'))
+  g3 <- (subset(data,data$group=='group3'))
+  group_means <- c(mean(g1$response),mean(g2$response),mean(g3$response))
+  return(group_means)
+}
+shuffle()
+
+```
+
+4c: Use a for loop to repeat the function in b 100 times. Store the results in a data frame that has 1 column indicating the replicate number and 1 column for each new group mean, for a total of 4 columns.
+
+```{r}
+for (i in 1:100) {
+  data.frame(i,shuffle()[1],shuffle()[2],shuffle()[3])
+}
+  
+```

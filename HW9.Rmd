@@ -1,0 +1,49 @@
+---
+title: "Organizing Code with Structured Programming"
+author: "Jenner Smith"
+date: "2024-03-27"
+output: html_document
+---
+```{r}
+library(tidyverse)
+
+################################################
+
+floodData <- function() {
+  Sample = 1:30
+  LemonFair = rnorm(n=30,mean=867,sd=50)
+  Cota = rnorm(n=30,mean=621,sd=50)
+  floodGroup <- data.frame(Sample,LemonFair,Cota)
+  return(floodGroup)
+}
+  
+floodGroup <- floodData()
+
+###############################################
+
+floodSum <- function() {
+  summary(floodData())
+}
+
+floodSum()
+
+
+#############################################
+
+floodPlot <- function() {
+library(tidyverse)
+floodLong <- floodData() %>%
+pivot_longer(cols=LemonFair:Cota,
+                          names_to="Site",
+                          values_to="TP")
+
+plot <- ggplot(data=floodLong,
+               aes(x=Site,y=TP,fill=Site)) +
+  geom_violin()
+
+return(plot) 
+}
+
+floodPlot()
+
+```

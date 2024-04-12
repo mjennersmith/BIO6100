@@ -21,3 +21,7 @@ Homework 7 - Exploring Hypotheses: [link](HW7.html)
 
 Homework 8 - Data manipulations using the dplyr package: [link](HW8.html)
 
+Homework 9 - Organizing Code with Structured Programmin: [link](HW9.html)
+
+Homework 10 - For loops and randomization tests: [link](HW10.html)
+
