@@ -11,9 +11,9 @@
 
 <meta name="author" content="Jenner Smith" />
 
-<meta name="date" content="2024-02-08" />
+<meta name="date" content="2024-04-25" />
 
-<title>Comp Bio Homepage</title>
+<title>HW11</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -350,24 +350,144 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Comp Bio Homepage</h1>
+<h1 class="title toc-ignore">HW11</h1>
 <h4 class="author">Jenner Smith</h4>
-<h4 class="date">2024-02-08</h4>
+<h4 class="date">2024-04-25</h4>
 
 </div>
 
 
-<p>Here’s a link to the example: <a href="example.html">link</a></p>
-<p>Homework 3 - Regular Expressions: <a href="Homework-3.html">link</a></p>
-<p>Homework 4 - Atomic Vectors: <a href="HW4.html">link</a></p>
-<p>Homework 5 - Matrices, Lists, &amp; Data Frames: <a href="HW5.html">link</a></p>
-<p>Homework 6 - Simulating &amp; Fitting Data Distributions: <a href="HW6.html">link</a></p>
-<p>Homework 7 - Exploring Hypotheses: <a href="HW7.html">link</a></p>
-<p>Homework 8 - Data manipulations using the dplyr package: <a href="HW8.html">link</a></p>
-<p>Homework 9 - Organizing Code with Structured Programmin: <a href="HW9.html">link</a></p>
-<p>Homework 10 - For loops and randomization tests: <a href="HW10.html">link</a></p>
-<p>Homework 11 - Batch Processing: <a href="HW11.html">link</a></p>
-<p>Homework 12 - Advanced ggplotting: <a href="HW12.html">link</a></p>
+<pre><code># When executing this code, I made a copy of the barracudar package from lecture and worked in a new R script. This is a copy of the code to show my work.
+
+# load packages ----
+library(log4r)
+library(TeachingDemos)
+library(tidyverse)
+library(pracma)
+library(ggmosaic)
+# load any additional packages here...
+
+
+# source function files ----
+
+source(&quot;barracudar/DataTableTemplate.R&quot;)
+source(&quot;barracudar/AddFolder.R&quot;)
+source(&quot;barracudar/BuildFunction.R&quot;)
+source(&quot;barracudar/MetaDataTemplate.R&quot;)
+source(&quot;barracudar/CreatePaddedLabel.R&quot;)
+source(&quot;barracudar/InitiateSeed.R&quot;)
+source(&quot;barracudar/SetUpLog.R&quot;)
+source(&quot;barracudar/SourceBatch.R&quot;)
+
+source(&quot;barracudar/QBox.R&quot;)
+source(&quot;barracudar/QCon1.R&quot;)
+source(&quot;barracudar/QCon2.R&quot;)
+source(&quot;barracudar/QHist.R&quot;)
+source(&quot;barracudar/QLogis.R&quot;)
+source(&quot;barracudar/QScat.R&quot;)
+source(&quot;barracudar/QBub.R&quot;)
+source(&quot;barracudar/QContour.R&quot;)
+
+# source any additional scripts here...
+
+# set random number seed ----
+
+initiate_seed() # preserves random number seed
+# initiate_seed(user_seed=NULL)
+# initiate_seed(user_seed=999) # user-defined seed for set.seed()
+
+# set up log files ----
+
+set_up_log()
+# set_up_log(my_logfile=&#39;logfile.txt&#39;,
+#            console_echo=FALSE)
+#===================================================
+# commands above this line should be executed first, in this order
+#===================================================
+
+
+getwd()
+
+# create directory shortcut for future use 
+
+original &lt;- &quot;C:/Users/msmit156/OneDrive - University of Vermont/Desktop/BIO 6100/StrategicCodingPractices - HW11/StrategicCodingPractices/OriginalData&quot;
+clean&lt;- &quot;C:/Users/msmit156/OneDrive - University of Vermont/Desktop/BIO 6100/StrategicCodingPractices - HW11/StrategicCodingPractices/CleanedData&quot;
+# set directory to folder where data is stored
+setwd(&quot;C:/Users/msmit156/OneDrive - University of Vermont/Desktop/BIO 6100/StrategicCodingPractices - HW11/StrategicCodingPractices/OriginalData&quot;)
+
+# create list of files 
+
+filelist &lt;- list.files(original)
+filelist
+
+# use a for loop to go through each folder (there are 8) and pull out the &#39;count data&#39; files 
+
+filenames &lt;- c()
+for (i in 1:8) {
+  setwd(paste0(original, &quot;/&quot;, filelist[i]))
+  filenames[i] &lt;- list.files(pattern=&quot;countdata&quot;)
+}
+
+filenames
+
+# take data from original folder, remove unknown sci names, and move it to clean folder
+
+year &lt;- 2015:2022
+
+for (i in 1:8){
+  setwd(paste0(original, &quot;/&quot;, filelist[i])) # work on each individual file 
+  x &lt;- read.csv(file = filenames[i], na.strings = c(&quot;&quot;,&quot;NA&quot;))
+  y &lt;- x[complete.cases(a[&quot;scientificName&quot;]), ] # remove observations with no scientific name
+  setwd(clean) 
+  write.csv(y,paste0(&quot;CleanedData_&quot;,year[i],&quot;.csv&quot;), row.names = FALSE) # rename and move to clean data folder
+}
+
+# extract year from file name 
+
+getwd()
+cleanlist &lt;- list.files(clean)
+cleanlist
+for (i in 1:8){
+  a = substring(cleanlist[i],13,16)
+  cat(&quot;File Number -&quot;, i,&quot;, Year -&quot;, a,&quot;\n&quot;)
+}
+
+# calculate abundance by year - read each file, calculate and print abundance by year
+
+for (i in 1:8){
+  files=read.csv(file = cleanlist[i])
+  year = substring(cleanlist[i],13,16)
+  abund= sum(a$clusterSize)
+  cat(&quot;Year -&quot;, year,&quot;, Species Abundance -&quot;, abund,&quot;\n&quot;)
+}
+
+# caluclate richness by year
+
+for (i in 1:8){
+  file=read.csv(file = cleanlist[i])
+  year = substring(cleanlist[i],13,16)
+  rich=length(unique(a$scientificName))
+  cat(&quot;Year -&quot;, year, &quot;Species -&quot;, rich ,&quot;\n&quot;)
+}
+
+# empty data frame 
+
+summary &lt;- data.frame(FileNames=rep(NA,8),Years=rep(NA,8),SpeciesAbundance=rep(NA,8),SpeciesRichness=rep(NA,8))
+
+# create batch process to run the functions and populate dataset with summary statistics 
+
+for (i in 1:8){
+  f=read.csv(file = cleanlist[i]) # pull each file
+  y = substring(cleanlist[i],13,16) # pull year
+  summary$year[i] &lt;- y
+  c= sum(f$clusterSize) # pull abundance
+  summary$SpeciesAbundance[i] &lt;- c
+  r=length(unique(f$scientificName)) # pull richness
+  summary$SpeciesRichness[i] &lt;- r
+  summary$filenames[i] &lt;- cleanlist[i] # create column for each file name
+}
+
+summary</code></pre>
 
 
 

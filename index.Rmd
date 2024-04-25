@@ -25,3 +25,7 @@ Homework 9 - Organizing Code with Structured Programmin: [link](HW9.html)
 
 Homework 10 - For loops and randomization tests: [link](HW10.html)
 
+Homework 11 - Batch Processing: [link](HW11.html)
+
+Homework 12 - Advanced ggplotting: [link](HW12.html)
+
